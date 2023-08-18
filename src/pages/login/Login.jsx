@@ -4,19 +4,21 @@ import axios from "axios"
 import {FcGoogle} from "react-icons/fc"
 import { useDispatch } from "react-redux"
 import { loginFulfilled, loginPending, loginRejected } from "../../redux/reducers/authReducer"
+import {ToastContainer, toast} from "react-toastify"
 
 const Login = ()=>{
     const dispatch = useDispatch()
     const location = useLocation()
     const redirectPath = location.state?.path  || "/"
     const navigate = useNavigate()
+    // handle login with google
     const handleLogin = useGoogleLogin({
         onSuccess: async(tokenResponse)=>{
-            const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-                headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-            })
             dispatch(loginPending())
             try{
+                const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+                    headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+                })
                 const userLoginInfo = await axios.post(`http://localhost:4000/api/v1/users/login`,
                 {
                     name: userInfo.data.name,
@@ -27,8 +29,14 @@ const Login = ()=>{
                 dispatch(loginFulfilled(userLoginInfo.data))
                 navigate(redirectPath, {replace: true})
             }catch(err){
+                if(err.message === "Network Error"){
+                    toast.error("تأكد من اتصالك بالانترنت")
+                }else if(err.response.data.error_description){
+                    toast.error(err.response.data.error_description)
+                }else {
+                    toast.error(err.response.data.message)
+                }
                 dispatch(loginRejected())
-                console.log(err)
             }
         }
     })
@@ -56,8 +64,21 @@ const Login = ()=>{
                 </div>
             </section>
         </section>
+        <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
         </>
     )
 }
 
 export default Login
+
