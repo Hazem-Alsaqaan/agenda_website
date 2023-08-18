@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { FcGoogle } from "react-icons/fc"
 import { loginFulfilled, loginPending, loginRejected} from "../../redux/reducers/authReducer"
 import { useDispatch } from "react-redux"
+import {ToastContainer, toast} from "react-toastify"
 
 
 const Register = ()=>{
@@ -13,11 +14,11 @@ const Register = ()=>{
     const navigate = useNavigate()
     const handleSignUp = useGoogleLogin({
         onSuccess: async(tokenResponse)=>{
-            const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-                headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-            })
             dispatch(loginPending())
             try{
+                const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+                    headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+                })
                 const userLoginInfo = await axios.post(`http://localhost:4000/api/v1/users/register`,
                 {
                     name: userInfo.data.name,
@@ -28,8 +29,16 @@ const Register = ()=>{
                 dispatch(loginFulfilled(userLoginInfo.data))
                 navigate(redirectPath, {replace: true})
             }catch(err){
+                if(err.message === "Network Error"){
+                    toast.error("تأكد من اتصالك بالانترنت")
+                }else if(err.response.data.error_description){
+                    toast.error(err.response.data.error_description)
+                }else if (err.response.data.message) {
+                    toast.error(err.response.data.message)
+                }else{
+                    toast.error(err.response.data)
+                }
                 dispatch(loginRejected())
-                console.log(err)
             }
         }
     })
@@ -57,6 +66,18 @@ const Register = ()=>{
                 </div>
             </section>
         </section>
+        <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
         </>
     )
 }

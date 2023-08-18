@@ -33,8 +33,10 @@ const Login = ()=>{
                     toast.error("تأكد من اتصالك بالانترنت")
                 }else if(err.response.data.error_description){
                     toast.error(err.response.data.error_description)
-                }else {
+                }else if (err.response.data.message) {
                     toast.error(err.response.data.message)
+                }else{
+                    toast.error(err.response.data)
                 }
                 dispatch(loginRejected())
             }
