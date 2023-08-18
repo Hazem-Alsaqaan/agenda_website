@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"
 import { logOut } from "../../redux/reducers/authReducer"
 import "./Calendar.css"
 import { useNavigate } from "react-router-dom"
-import { ToastContainer, toast } from "react-toastify"
+import { toast } from "react-toastify"
 
 const Calendar =()=>{
     const navigate = useNavigate()
@@ -61,18 +61,6 @@ const Calendar =()=>{
                         <button className="text-sky-600 text-xl m-2 bg-sky-100  py-1 px-8 shadow-lg rounded-md hover:bg-sky-200 duration-300 " onClick={()=>dispatch(logOut())}>إلغاء الحساب</button>
                     </div>
                 </div>
-                <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-                />
         </>
     )
 }

@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import { addNewCase, updateCases } from '../../redux/actions/casesAction';
 import { memo } from 'react';
 import { setDecision, setDefendant, setFromSession, setNumber, setPlaintiff, setTheYear, setToSession, setTypeCase } from '../../redux/reducers/objectCaseReducer';
@@ -149,18 +148,6 @@ const CreateCase = ({item})=>{
                     </div>
                 </div>
             </section>
-            <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-            />
         </>
     )
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getSingleCase } from "../../redux/actions/casesAction"
 import { RotatingLines } from "react-loader-spinner"
+import { ToastContainer } from "react-toastify"
 
 
 const SingleCase =()=>{
@@ -66,6 +67,18 @@ const SingleCase =()=>{
             </section>
             }
         </div>
+        <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
         </>
     )
 }
