@@ -7,7 +7,6 @@ import "./Calendar.css"
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
 
-
 const Calendar =()=>{
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -19,14 +18,14 @@ const Calendar =()=>{
 
     const setDateValue = (date)=>{
         setSelectDate(date)
-        setCurrentDay(date.getDate())
-        setCurrentMonth(date.getMonth() + 1)
+        setCurrentDay(date.getDate() < 10 ? `0${date.getDate()}` : date.getDate())
+        setCurrentMonth(date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1)
         setCurrentYear(date.getFullYear())
     }
 
-    const handleSelectedDay =()=>{
+    const handleSelectedDay =async()=>{
         if(currentDay){
-            navigate(`/${currentDay}-${currentMonth}-${currentYear}`)
+            navigate(`/${currentYear}-${currentMonth}-${currentDay}`)
         }else{
             navigate("/")
             toast.warn("حدد اليوم أولا")
@@ -35,7 +34,7 @@ const Calendar =()=>{
     return(
         <>
                 <div className="main_container_react_date_picker flex flex-col items-center">
-                    <div className="user_info w-full flex justify-around items-center">
+                    <div className="user_info w-full flex justify-around items-center mb-1">
                         <div>
                             <h1 className="font-bold text-7xl font-ruqaa vsm2:text-5xl">الأجندة القضائية</h1>
                         </div>
