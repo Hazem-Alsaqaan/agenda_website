@@ -24,9 +24,16 @@ export const addNewCase = createAsyncThunk("cases/addNewCase", async(item)=>{
         toast.success("تم بنجاح")
         return res.data
     }catch(err){
-        console.log(err)
-        toast.error(err)
-        throw(err.response)
+        if(err.message === "Network Error"){
+            toast.error("تأكد من اتصالك بالانترنت")
+            throw("تأكد من اتصالك بالانترنت")
+        }else if (err.response.data.message){
+            toast.error(err.response.data.message)
+            throw(err.response.data.message)
+        }else{
+            toast.error(err.response.data)
+            throw(err.response.data)
+        }
     }
 })
 // get cases
@@ -41,8 +48,16 @@ export const getCases = createAsyncThunk("cases/getCases", async(item)=>{
         )
         return res.data
     }catch(err){
-        console.log(err)
-        throw(err.response)
+        if(err.message === "Network Error"){
+            toast.error("تأكد من اتصالك بالانترنت")
+            throw("تأكد من اتصالك بالانترنت")
+        }else if (err.response.data.message){
+            toast.error(err.response.data.message)
+            throw(err.response.data.message)
+        }else{
+            toast.error(err.response.data)
+            throw(err.response.data)
+        }
     }
 })
 // get single case
@@ -57,8 +72,16 @@ export const getSingleCase = createAsyncThunk("cases/getSingleCases", async(item
         )
         return res.data
     }catch(err){
-        console.log(err)
-        throw(err.response)
+        if(err.message === "Network Error"){
+            toast.error("تأكد من اتصالك بالانترنت")
+            throw("تأكد من اتصالك بالانترنت")
+        }else if (err.response.data.message){
+            toast.error(err.response.data.message)
+            throw(err.response.data.message)
+        }else{
+            toast.error(err.response.data)
+            throw(err.response.data)
+        }
     }
 })
 
@@ -82,7 +105,16 @@ export const updateCases = createAsyncThunk("cases/updateCases", async(item)=>{
         toast.success("تم التعديل بنجاح")
         return res.data
     }catch(err){
-        console.log(err)
+        if(err.message === "Network Error"){
+            toast.error("تأكد من اتصالك بالانترنت")
+            throw("تأكد من اتصالك بالانترنت")
+        }else if (err.response.data.message){
+            toast.error(err.response.data.message)
+            throw(err.response.data.message)
+        }else{
+            toast.error(err.response.data)
+            throw(err.response.data)
+        }
     }
 })
 // delete case
@@ -98,7 +130,15 @@ export const deleteCase = createAsyncThunk("cases/deleteCase", async(item)=>{
         toast.success("تم الحذف بنجاج")
         return res.data
     }catch(err){
-        console.log(err)
-        throw(err.response)
+        if(err.message === "Network Error"){
+            toast.error("تأكد من اتصالك بالانترنت")
+            throw("تأكد من اتصالك بالانترنت")
+        }else if (err.response.data.message){
+            toast.error(err.response.data.message)
+            throw(err.response.data.message)
+        }else{
+            toast.error(err.response.data)
+            throw(err.response.data)
+        }
     }
 })
