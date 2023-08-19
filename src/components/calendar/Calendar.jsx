@@ -6,6 +6,8 @@ import { logOut } from "../../redux/reducers/authReducer"
 import "./Calendar.css"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { removeAccount } from "../../redux/actions/authAction"
+import { deleteAllUserCases } from "../../redux/actions/casesAction"
 
 const Calendar =()=>{
     const navigate = useNavigate()
@@ -23,6 +25,7 @@ const Calendar =()=>{
         setCurrentYear(date.getFullYear())
     }
 
+    //handle selected day 
     const handleSelectedDay =async()=>{
         if(currentDay){
             navigate(`/${currentYear}-${currentMonth}-${currentDay}`)
@@ -30,6 +33,11 @@ const Calendar =()=>{
             navigate("/")
             toast.warn("حدد اليوم أولا")
         }
+    }
+    // handle remove account
+    const handleRemoveAccount = async()=>{
+        dispatch(removeAccount(currentUser))
+        dispatch(deleteAllUserCases(currentUser))
     }
     return(
         <>
@@ -58,7 +66,7 @@ const Calendar =()=>{
                             <button onClick={()=>handleSelectedDay()} className="text-white text-2xl bg-sky-500 font-bold py-1 px-11 shadow-lg rounded-md hover:bg-sky-600 duration-300">تــم</button>
                         </DatePicker>
                         <button className="text-sky-600 text-xl m-2 bg-sky-100  py-1 px-8 shadow-lg rounded-md hover:bg-sky-200 duration-300 " onClick={()=>dispatch(logOut())}>تسجيل الخروج</button>
-                        <button className="text-sky-600 text-xl m-2 bg-sky-100  py-1 px-8 shadow-lg rounded-md hover:bg-sky-200 duration-300 " onClick={()=>dispatch(logOut())}>إلغاء الحساب</button>
+                        <button className="text-sky-600 text-xl m-2 bg-sky-100  py-1 px-8 shadow-lg rounded-md hover:bg-sky-200 duration-300 " onClick={()=>dispatch(handleRemoveAccount())}>إلغاء الحساب</button>
                     </div>
                 </div>
         </>

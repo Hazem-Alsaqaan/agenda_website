@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
-import { addNewCase, deleteCase, getCases, getSingleCase, updateCases } from "../actions/casesAction"
+import { addNewCase, deleteAllUserCases, deleteCase, getCases, getSingleCase, updateCases } from "../actions/casesAction"
 
 
 
@@ -67,6 +67,17 @@ const casesSlice = createSlice({
             state.cases = [...state.cases, action.payload]
         }),
         builder.addCase(deleteCase.rejected, (state)=>{
+            state.casesLoading = false
+        })
+        //delete all user cases 
+        builder.addCase(deleteAllUserCases.pending, (state)=>{
+            state.casesLoading = true
+        }),
+        builder.addCase(deleteAllUserCases.fulfilled, (state, action)=>{
+            state.casesLoading = false
+            state.cases = [...state.cases, action.payload]
+        }),
+        builder.addCase(deleteAllUserCases.rejected, (state)=>{
             state.casesLoading = false
         })
     }

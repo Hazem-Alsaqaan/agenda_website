@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
+import { removeAccount } from "../actions/authAction"
 const userStorage = JSON.parse(window.localStorage.getItem("currentUser"))
 
 const authReducer = createSlice({
@@ -8,6 +9,7 @@ const authReducer = createSlice({
         currentUser: userStorage ? userStorage : null,
         loginLoading: false,
         loginError: false,
+        removeLoading: false
     },
     reducers: {
         // handle Login reducer functions
@@ -26,7 +28,19 @@ const authReducer = createSlice({
             state.currentUser = null
             window.localStorage.removeItem("currentUser")
         },
-    
+    },
+    extraReducers:(builder)=>{
+        builder.addCase(removeAccount.pending, (state)=>{
+            state.removeLoading = true
+        }),
+        builder.addCase(removeAccount.fulfilled, (state)=>{
+            state.removeLoading = false
+                state.currentUser = null
+                window.localStorage.removeItem("currentUser")
+        }),
+        builder.addCase(removeAccount.rejected, (state)=>{
+            state.removeLoading = false
+        })
     }
 })
 

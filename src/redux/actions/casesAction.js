@@ -142,3 +142,27 @@ export const deleteCase = createAsyncThunk("cases/deleteCase", async(item)=>{
         }
     }
 })
+
+// delete All user cases
+export const deleteAllUserCases = createAsyncThunk("cases/deleteAllUserCases", async(item)=>{
+    try{
+        const deleteUserCases = await axios.delete(`http://localhost:4000/api/v1/cases/deleteUserCases`,{
+            headers:{
+                Authorization: `${item.token}`
+            }
+        })
+        return deleteUserCases.data 
+    }catch(err){
+        if(err.message === "Network Error"){
+            toast.error("تأكد من اتصالك بالانترنت")
+            throw("تأكد من اتصالك بالانترنت")
+        }else if (err.response.data.message){
+            toast.error(err.response.data.message)
+            throw(err.response.data.message)
+        }else{
+            toast.error(err.response.data)
+            throw(err.response.data)
+        }
+    }
+})
+
