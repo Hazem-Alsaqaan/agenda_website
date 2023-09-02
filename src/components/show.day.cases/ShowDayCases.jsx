@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { RotatingLines} from "react-loader-spinner"
-import { memo, useEffect } from "react"
+import { memo, useEffect, useState } from "react"
 import { deleteCase, getCases } from "../../redux/actions/casesAction"
 
 // eslint-disable-next-line react/prop-types, react-refresh/only-export-components
 const ShowDayCases = ({getItemValue})=>{
+    const [showCaseRender, setShowCaseRender] = useState(false)
     const navigate = useNavigate()
     const {casesByDate} = useSelector((state)=>state.casesSlice)
     const {casesByDateLoading} = useSelector((state)=>state.casesSlice)
@@ -14,11 +15,12 @@ const ShowDayCases = ({getItemValue})=>{
     const {currentUser} = useSelector((state)=>state.authReducer)
     
     useEffect(()=>{
+        setShowCaseRender(true)
         const GetCasesByDate = ()=>{
             dispatch(getCases({date: date_id, token: currentUser.token}))
         }
         return()=>GetCasesByDate()
-    },[currentUser.token, date_id, dispatch])
+    },[currentUser.token, date_id, dispatch, showCaseRender])
 
     // handle delet th case
     const handleDeleteCase = (id)=>{

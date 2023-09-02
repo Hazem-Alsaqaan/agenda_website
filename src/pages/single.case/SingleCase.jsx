@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getSingleCase } from "../../redux/actions/casesAction"
@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify"
 
 
 const SingleCase =()=>{
+    const [singleCaseRender, setSingleCaseRender] = useState(false)
     const dispatch = useDispatch()
     const {case_id} = useParams()
     const {currentUser} = useSelector((state)=>state.authReducer)
@@ -14,11 +15,12 @@ const SingleCase =()=>{
     const {singleCaseLoading} = useSelector((state)=>state.casesSlice)
 
     useEffect(()=>{
+        setSingleCaseRender(true)
         const cleanGetSingleCase = ()=>{
             dispatch(getSingleCase({id: case_id, token: currentUser.token}))
         }
         return()=>cleanGetSingleCase()
-    },[case_id, currentUser.token, dispatch])
+    },[case_id, currentUser.token, dispatch, singleCaseRender])
     return(
         <>
         <div className=" min-h-screen bg-no-repeat bg-cover py-10 mx-0 flex flex-col items-center" style={{backgroundImage: "url(https://res.cloudinary.com/dkhu7rt8n/image/upload/v1691845471/judicial_agenda/14547742_rm218batch4-ning-34_fxd8rj.jpg)"}}>
