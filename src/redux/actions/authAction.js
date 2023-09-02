@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 export const removeAccount = createAsyncThunk("auth/removeAccount", async(item)=>{
     try{
-        const deleteUserAccount = await axios.delete(`http://localhost:4000/api/v1/users/deleteUser/${item.user._id}`,{
+        const deleteUserAccount = await axios.delete(`https://doubtful-slip-mite.cyclic.app/api/v1/users/deleteUser/${item.user._id}`,{
             headers:{
                 Authorization: `${item.token}`
             }

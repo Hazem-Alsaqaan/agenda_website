@@ -19,7 +19,7 @@ const Register = ()=>{
                 const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
                     headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
                 })
-                const userLoginInfo = await axios.post(`http://localhost:4000/api/v1/users/register`,
+                const userLoginInfo = await axios.post(`https://doubtful-slip-mite.cyclic.app/api/v1/users/register`,
                 {
                     name: userInfo.data.name,
                     email: userInfo.data.email,

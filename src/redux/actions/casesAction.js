@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 // add new cases
 export const addNewCase = createAsyncThunk("cases/addNewCase", async(item)=>{
     try{
-        const res = await axios.post(`http://localhost:4000/api/v1/cases/newCase`, {
+        const res = await axios.post(`https://doubtful-slip-mite.cyclic.app/api/v1/cases/newCase`, {
             number: item.number,
             theYear: item.theYear,
             plaintiff: item.plaintiff, 
@@ -39,7 +39,7 @@ export const addNewCase = createAsyncThunk("cases/addNewCase", async(item)=>{
 // get cases
 export const getCases = createAsyncThunk("cases/getCases", async(item)=>{
     try{
-        const res = await axios.get(`http://localhost:4000/api/v1/cases/getCases/${item.date}`,
+        const res = await axios.get(`https://doubtful-slip-mite.cyclic.app/api/v1/cases/getCases/${item.date}`,
         {
             headers:{
                 Authorization: `${item.token}`
@@ -63,7 +63,7 @@ export const getCases = createAsyncThunk("cases/getCases", async(item)=>{
 // get single case
 export const getSingleCase = createAsyncThunk("cases/getSingleCases", async(item)=>{
     try{
-        const res = await axios.get(`http://localhost:4000/api/v1/cases/oneCase/${item.id}`,
+        const res = await axios.get(`https://doubtful-slip-mite.cyclic.app/api/v1/cases/oneCase/${item.id}`,
         {
             headers:{
                 Authorization: `${item.token}`
@@ -88,7 +88,7 @@ export const getSingleCase = createAsyncThunk("cases/getSingleCases", async(item
 // update cases 
 export const updateCases = createAsyncThunk("cases/updateCases", async(item)=>{
     try{
-        const res = await axios.patch(`http://localhost:4000/api/v1/cases/updateCase/${item.id}`,{
+        const res = await axios.patch(`https://doubtful-slip-mite.cyclic.app/api/v1/cases/updateCase/${item.id}`,{
             number: item.number,
             theYear: item.theYear,
             plaintiff: item.plaintiff, 
@@ -120,7 +120,7 @@ export const updateCases = createAsyncThunk("cases/updateCases", async(item)=>{
 // delete case
 export const deleteCase = createAsyncThunk("cases/deleteCase", async(item)=>{
     try{
-        const res = await axios.delete(`http://localhost:4000/api/v1/cases/deleteCase/${item.id}`,
+        const res = await axios.delete(`https://doubtful-slip-mite.cyclic.app/api/v1/cases/deleteCase/${item.id}`,
         {
             headers:{
                 Authorization: `${item.token}`
@@ -146,7 +146,7 @@ export const deleteCase = createAsyncThunk("cases/deleteCase", async(item)=>{
 // delete All user cases
 export const deleteAllUserCases = createAsyncThunk("cases/deleteAllUserCases", async(item)=>{
     try{
-        const deleteUserCases = await axios.delete(`http://localhost:4000/api/v1/cases/deleteUserCases`,{
+        const deleteUserCases = await axios.delete(`https://doubtful-slip-mite.cyclic.app/api/v1/cases/deleteUserCases`,{
             headers:{
                 Authorization: `${item.token}`
             }
