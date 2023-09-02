@@ -45,11 +45,11 @@ const Login = ()=>{
 
     return(
         <>
-        <section className="login_page min-h-screen  flex flex-col items-center py-12">
+        <section className="login_page min-h-screen  flex flex-col items-center py-12" style={{backgroundImage: "url(https://res.cloudinary.com/dkhu7rt8n/image/upload/v1691845471/judicial_agenda/14547742_rm218batch4-ning-34_fxd8rj.jpg)"}}>
             <section className="login_landing flex flex-col items-center  px-5 flex-1">
                 <h1 className="font-bold text-5xl mb-10 font-ruqaa whitespace-nowrap vsm:text-4xl">الأجندة القضائية</h1>
                 <div className="login_img_container overflow-hidden max-w-sm">
-                    <img src="https://res.cloudinary.com/dkhu7rt8n/image/upload/v1691604641/judicial_agenda/pzosym43jfsxgtajbf62.jpg" alt=""/>
+                    <img src="https://res.cloudinary.com/dkhu7rt8n/image/upload/v1693519037/judicial_agenda/ebook_4488441_jlhpor.png" alt=""/>
                 </div>
             </section>
 
