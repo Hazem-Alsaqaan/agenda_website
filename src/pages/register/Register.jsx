@@ -49,7 +49,7 @@ const Register = ()=>{
             <section className="login_landing flex flex-col items-center  px-5 flex-1">
                 <h1 className="font-bold text-5xl mb-10 font-ruqaa whitespace-nowrap vsm:text-4xl">أهلا بك</h1>
                 <div className="login_img_container overflow-hidden max-w-sm">
-                    <img src="https://res.cloudinary.com/dkhu7rt8n/image/upload/v1693519263/judicial_agenda/schedule_5181221_vjdsgk.png" alt=""/>
+                    <img src="https://res.cloudinary.com/dkhu7rt8n/image/upload/v1694094219/judicial_agenda/letter_5075929_swbsj1.png" alt=""/>
                 </div>
             </section>
 
